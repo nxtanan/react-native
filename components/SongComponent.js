@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {Avatar, Card, Title, Paragraph, List, Button} from 'react-native-paper';
+import * as COMPONENT_NAME from '../constants/ComponentName';
 
 const SongComponent = ({route, navigation}) => {
   const {
@@ -21,7 +22,11 @@ const SongComponent = ({route, navigation}) => {
 
   return (
     <ScrollView>
-      <Button icon="plus" onPress={() => navigation.navigate('SongCreate')}>
+      <Button
+        icon="plus"
+        onPress={() =>
+          navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME)
+        }>
         Save
       </Button>
       <Card>

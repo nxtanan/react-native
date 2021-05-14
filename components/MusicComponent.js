@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View, StyleSheet} from 'react-native';
 import {
   List,
   Searchbar,
-  Button,
   ActivityIndicator,
   Colors,
+  FAB,
 } from 'react-native-paper';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import * as API_PATH from '../constants/APIPath';
+import * as COMPONENT_NAME from '../constants/ComponentName';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -58,42 +59,60 @@ const MusicComponent = () => {
       </View>
     </List.Subheader>
   );
-  const renderRightSubHeader = () => (
-    <Button
-      icon="plus"
-      mode="text"
-      onPress={() => navigation.navigate('SongCreate')}>
-      Add
-    </Button>
-  );
 
   return (
-    <ScrollView>
+    <View>
       <Searchbar
+        style={styles.searchBar}
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
-      {isLoading ? (
-        <ActivityIndicator animating={true} color={Colors.red800} />
-      ) : (
-        <List.Section>
-          <List.Subheader>
-            <List.Item title={'Music playlist'} right={renderRightSubHeader} />
-          </List.Subheader>
-          {playList.map((song, index) => (
-            <List.Item
-              key={index}
-              title={renderSongTitle(song)}
-              left={renderLeft}
-              right={() => renderRight(song)}
-              onPress={() => navigation.navigate('Song', {song, index})}
-            />
-          ))}
-        </List.Section>
-      )}
-    </ScrollView>
+      <ScrollView>
+        {isLoading ? (
+          <ActivityIndicator animating={true} color={Colors.red800} />
+        ) : (
+          <List.Section>
+            {playList.map((song, index) => (
+              <List.Item
+                key={index}
+                title={renderSongTitle(song)}
+                left={renderLeft}
+                right={() => renderRight(song)}
+                onPress={() =>
+                  navigation.navigate(COMPONENT_NAME.SONG_COMPONENT_NAME, {
+                    song,
+                    index,
+                  })
+                }
+              />
+            ))}
+          </List.Section>
+        )}
+      </ScrollView>
+      <FAB
+        label="Add"
+        uppercase={false}
+        style={styles.fab}
+        small
+        icon="plus"
+        onPress={() =>
+          navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME)
+        }
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    right: 10,
+    top: 0,
+  },
+  searchBar: {
+    width: '70%',
+  },
+});
 
 export default MusicComponent;
