@@ -10,6 +10,7 @@ import {
   List,
   Provider,
   Searchbar,
+  Portal,
 } from 'react-native-paper';
 import Toast from 'react-native-simple-toast';
 import * as API_PATH from '../constants/APIPath';
@@ -112,7 +113,7 @@ const MusicComponent = () => {
       <List.Subheader>
         <View>
           <IconButton
-            icon="pen"
+            icon="pencil"
             color={Colors.blue500}
             size={20}
             onPress={() =>
@@ -123,7 +124,7 @@ const MusicComponent = () => {
             }
           />
           <IconButton
-            icon="delete"
+            icon="trash-can"
             color={Colors.red500}
             size={20}
             onPress={() => showModal(song)}
@@ -132,6 +133,9 @@ const MusicComponent = () => {
       </List.Subheader>
     </View>
   );
+  const [state, setState] = useState({open: false});
+  const onStateChange = ({open}) => setState({open});
+  const {open} = state;
 
   return (
     <Provider>
@@ -163,13 +167,35 @@ const MusicComponent = () => {
           </List.Section>
         )}
       </ScrollView>
+      <Portal>
+        <FAB.Group
+          open={open}
+          icon={open ? 'grid-large' : 'grid'}
+          actions={[
+            {
+              icon: 'gamepad-round',
+              label: 'Add',
+              onPress: () =>
+                navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
+                  name: 'Create new song',
+                }),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
       <ConfirmModalComponent
         isOpen={visible}
         song={target}
         onDismiss={hideModal}
         onConfirm={song => deleteSong(song)}
       />
-      <FAB
+      {/* <FAB
         label="Add"
         uppercase={false}
         style={styles.fab}
@@ -180,7 +206,7 @@ const MusicComponent = () => {
             name: 'Create new song',
           })
         }
-      />
+      /> */}
     </Provider>
   );
 };
