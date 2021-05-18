@@ -11,6 +11,7 @@ import {
   Provider,
   Searchbar,
   Portal,
+  Divider,
 } from 'react-native-paper';
 import Toast from 'react-native-simple-toast';
 import * as API_PATH from '../constants/APIPath';
@@ -148,6 +149,7 @@ const MusicComponent = () => {
           <List.Section>
             {playList.map((song, index) => (
               <List.Item
+                style={styles.listItemContainer}
                 key={song.id}
                 title={renderSongTitle(song)}
                 left={renderLeft}
@@ -208,6 +210,11 @@ const styles = StyleSheet.create({
   snackBarContainer: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  listItemContainer: {
+    borderStyle: 'dotted',
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.8,
   },
 });
 

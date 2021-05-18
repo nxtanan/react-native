@@ -36,7 +36,8 @@ const SongComponent = ({route, navigation}) => {
       .finally(() => setLoading(false));
   }, [songID]);
 
-  const imageSource = {uri: `https://picsum.photos/70${songID}`};
+  const imageID = songID > 10 ? `7${songID}` : `70${songID}`;
+  const imageSource = {uri: `https://picsum.photos/${imageID}`};
   const renderLeftAvatar = () => (
     <Avatar.Image size={50} source={imageSource} />
   );
