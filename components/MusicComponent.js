@@ -11,7 +11,6 @@ import {
   Provider,
   Searchbar,
   Portal,
-  Divider,
 } from 'react-native-paper';
 import Toast from 'react-native-simple-toast';
 import * as API_PATH from '../constants/APIPath';
@@ -145,6 +144,8 @@ const MusicComponent = () => {
       <ScrollView>
         {isLoading ? (
           <ActivityIndicator animating={true} color={Colors.red800} />
+        ) : playList.length === 0 ? (
+          <Text style={styles.noDataText}>No data found</Text>
         ) : (
           <List.Section>
             {playList.map((song, index) => (
@@ -215,6 +216,11 @@ const styles = StyleSheet.create({
     borderStyle: 'dotted',
     borderBottomColor: 'black',
     borderBottomWidth: 0.8,
+  },
+  noDataText: {
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    marginTop: 30,
   },
 });
 

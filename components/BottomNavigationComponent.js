@@ -35,7 +35,7 @@ const BottomNavigationComponent = () => {
       navigationState={{index, routes}}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      barStyle={{backgroundColor: '#66d9ff'}}
+      // barStyle={{backgroundColor: '#66d9ff'}}
     />
   );
 };
