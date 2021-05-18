@@ -4,6 +4,7 @@ import {TextInput, Button, HelperText} from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
 
 const SongCreateComponent = ({route, navigation}) => {
   const {
@@ -64,9 +65,13 @@ const SongCreateComponent = ({route, navigation}) => {
     })
       .then(() => {
         createRecent('Create');
+        Toast.show('Create successfully', 2000, Toast.CENTER);
         goBackMusic();
       })
-      .catch(error => setServerError(true))
+      .catch(error => {
+        Toast.show('Create fail, please try again', 2000, Toast.CENTER);
+        setServerError(true);
+      })
       .finally(() => goBackMusic);
   };
 
@@ -81,9 +86,13 @@ const SongCreateComponent = ({route, navigation}) => {
     })
       .then(() => {
         createRecent('Update');
+        Toast.show('Update successfully', 2000, Toast.CENTER);
         goBackMusic();
       })
-      .catch(error => setServerError(true))
+      .catch(error => {
+        Toast.show('Update fail, please try again', 2000, Toast.CENTER);
+        setServerError(true);
+      })
       .finally(() => goBackMusic);
   };
 
