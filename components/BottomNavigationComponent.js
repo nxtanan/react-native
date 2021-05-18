@@ -9,8 +9,8 @@ const randomNumber = Math.floor(Math.random() * 20) + 1;
 const MusicRoute = () => <MusicComponent />;
 const ImagesRoute = () => <GalleryComponent randomNumber={randomNumber} />;
 const VideosRoute = () => <Text>Videos</Text>;
-const RecentRoute = () => <Text>Recent</Text>;
-const TimerRoute = () => <DataTableComponent />;
+const RecentRoute = () => <DataTableComponent />;
+const TimerRoute = () => <Text>Timer</Text>;
 
 const BottomNavigationComponent = () => {
   const [index, setIndex] = React.useState(0);

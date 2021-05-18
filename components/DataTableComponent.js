@@ -60,7 +60,7 @@ const DataTableComponent = () => {
             <DataTable.Pagination
               page={page}
               numberOfPages={Math.floor(recent.length / itemsPerPage)}
-              onPageChange={page => setPage(page)}
+              onPageChange={() => setPage(page)}
               label={`${from + 1}-${to} of ${recent.length}`}
             />
           </DataTable>
