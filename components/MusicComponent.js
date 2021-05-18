@@ -34,7 +34,6 @@ const MusicComponent = () => {
   const hideModal = () => setVisible(false);
 
   const getAllSongs = () => {
-    // setLoading(true);
     fetch(API_PATH.MOCK_API_SONG_GET_ALL)
       .then(response => response.json())
       .then(json => {
@@ -133,9 +132,6 @@ const MusicComponent = () => {
       </List.Subheader>
     </View>
   );
-  const [state, setState] = useState({open: false});
-  const onStateChange = ({open}) => setState({open});
-  const {open} = state;
 
   return (
     <Provider>
@@ -169,23 +165,14 @@ const MusicComponent = () => {
       </ScrollView>
       <Portal>
         <FAB.Group
-          open={open}
-          icon={open ? 'grid-large' : 'grid'}
-          actions={[
-            {
-              icon: 'gamepad-round',
-              label: 'Add',
-              onPress: () =>
-                navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
-                  name: 'Create new song',
-                }),
-            },
-          ]}
-          onStateChange={onStateChange}
+          open={false}
+          icon={'gamepad-round'}
+          actions={[]}
+          onStateChange={() => {}}
           onPress={() => {
-            if (open) {
-              // do something if the speed dial is open
-            }
+            navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
+              name: 'Create new song',
+            });
           }}
         />
       </Portal>
@@ -195,18 +182,6 @@ const MusicComponent = () => {
         onDismiss={hideModal}
         onConfirm={song => deleteSong(song)}
       />
-      {/* <FAB
-        label="Add"
-        uppercase={false}
-        style={styles.fab}
-        small
-        icon="plus"
-        onPress={() =>
-          navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
-            name: 'Create new song',
-          })
-        }
-      /> */}
     </Provider>
   );
 };
