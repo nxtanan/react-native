@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 const AppContainer = () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName={COMPONENT_NAME.HOME_COMPONENT_NAME}>
       <Stack.Screen
         name={COMPONENT_NAME.HOME_COMPONENT_NAME}
         component={BottomNavigationComponent}
@@ -28,6 +28,7 @@ const AppContainer = () => (
       <Stack.Screen
         name={COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME}
         component={SongCreateComponent}
+        options={({route}) => ({title: route.params.name})}
       />
     </Stack.Navigator>
   </NavigationContainer>
