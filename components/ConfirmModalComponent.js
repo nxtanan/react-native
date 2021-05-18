@@ -24,6 +24,7 @@ const ConfirmModalComponent = ({isOpen, song, onDismiss, onConfirm}) => {
         <Text>Are you sure to delete this song</Text>
         <View style={styles.container}>
           <IconButton
+            style={styles.iconButtonContainer}
             icon="check"
             color={Colors.green500}
             size={20}
@@ -48,6 +49,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
+  },
+  iconButtonContainer: {
+    marginRight: 80,
   },
 });
 
