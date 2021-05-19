@@ -7,6 +7,7 @@ import BottomNavigationComponent from '../components/BottomNavigationComponent';
 import MusicComponent from '../components/MusicComponent';
 import SongComponent from '../components/SongComponent';
 import SongCreateComponent from '../components/SongCreateComponent';
+import DataTableComponent from '../components/DataTableComponent';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,10 @@ const AppContainer = () => (
         name={COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME}
         component={SongCreateComponent}
         options={({route}) => ({title: route.params.name})}
+      />
+      <Stack.Screen
+        name={COMPONENT_NAME.SONG_HISTORY_COMPONENT_NAME}
+        component={DataTableComponent}
       />
     </Stack.Navigator>
   </NavigationContainer>

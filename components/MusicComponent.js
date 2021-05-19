@@ -26,6 +26,8 @@ const MusicComponent = () => {
   const [isLoading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
   const [target, setTarget] = useState({});
+  const [isOpen, setOpen] = useState(false);
+  const onStateChange = ({open}) => setOpen(open);
 
   const showModal = song => {
     setTarget(song);
@@ -33,7 +35,7 @@ const MusicComponent = () => {
   };
   const hideModal = () => setVisible(false);
 
-  const getAllSongs = () => {
+  const getData = () => {
     fetch(API_PATH.MOCK_API_SONG_GET_ALL)
       .then(response => response.json())
       .then(json => {
@@ -46,7 +48,9 @@ const MusicComponent = () => {
   };
 
   useEffect(() => {
-    getAllSongs();
+    if (isFocused) {
+      getData();
+    }
   }, [isFocused]);
 
   const onChangeSearch = query => {
@@ -87,7 +91,7 @@ const MusicComponent = () => {
       })
         .then(() => {
           createRecent('Delete', song.title);
-          getAllSongs();
+          getData();
           Toast.show('Delete successfully', 2000, Toast.CENTER);
           setTarget({});
           setVisible(false);
@@ -168,15 +172,26 @@ const MusicComponent = () => {
       </ScrollView>
       <Portal>
         <FAB.Group
-          open={false}
-          icon={'gamepad-round'}
-          actions={[]}
-          onStateChange={() => {}}
-          onPress={() => {
-            navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
-              name: 'Create new song',
-            });
-          }}
+          open={isOpen}
+          icon={isOpen ? 'apps-box' : 'apps'}
+          actions={[
+            {
+              icon: 'history',
+              label: 'History',
+              onPress: () =>
+                navigation.navigate(COMPONENT_NAME.SONG_HISTORY_COMPONENT_NAME),
+            },
+            {
+              icon: 'gamepad-round',
+              label: 'Add',
+              onPress: () =>
+                navigation.navigate(COMPONENT_NAME.SONG_CREATE_COMPONENT_NAME, {
+                  name: 'Create new song',
+                }),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {}}
         />
       </Portal>
       <ConfirmModalComponent

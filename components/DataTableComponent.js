@@ -1,27 +1,28 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import {
+  ActivityIndicator,
+  Colors,
   DataTable,
   FAB,
   Portal,
   Provider,
-  ActivityIndicator,
 } from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
 
 const DataTableComponent = () => {
+  const isFocused = useIsFocused();
   const [recent, setRecent] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [state, setState] = useState({open: false});
-  const onStateChange = ({open}) => setState({open});
-  const {open} = state;
+  const [isOpen, setOpen] = useState(false);
+  const onStateChange = ({open}) => setOpen(open);
   const itemsPerPage = 5;
   const [page, setPage] = useState(0);
   const from = page * itemsPerPage;
   const to = (page + 1) * itemsPerPage;
 
-  const getAllRecent = () => {
-    // setLoading(true);
+  const getData = () => {
     fetch(API_PATH.MOCK_API_RECENT_GET_ALL)
       .then(response => response.json())
       .then(json => {
@@ -33,13 +34,17 @@ const DataTableComponent = () => {
   };
 
   useEffect(() => {
-    getAllRecent();
-  }, []);
+    if (isFocused) {
+      getData();
+    }
+  }, [isFocused]);
 
   return (
     <Provider>
       {isLoading ? (
-        <ActivityIndicator animating={true} />
+        <ActivityIndicator animating={true} color={Colors.red800} />
+      ) : recent.length === 0 ? (
+        <Text style={styles.noDataText}>No data found</Text>
       ) : (
         <ScrollView>
           <DataTable>
@@ -66,8 +71,8 @@ const DataTableComponent = () => {
           </DataTable>
           <Portal>
             <FAB.Group
-              open={open}
-              icon={open ? 'calendar-today' : 'plus'}
+              open={isOpen}
+              icon={isOpen ? 'calendar-today' : 'plus'}
               actions={[
                 {icon: 'plus', onPress: () => console.log('Pressed add')},
                 {
@@ -88,11 +93,7 @@ const DataTableComponent = () => {
                 },
               ]}
               onStateChange={onStateChange}
-              onPress={() => {
-                if (open) {
-                  // do something if the speed dial is open
-                }
-              }}
+              onPress={() => {}}
             />
           </Portal>
         </ScrollView>
@@ -100,5 +101,13 @@ const DataTableComponent = () => {
     </Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  noDataText: {
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    marginTop: 30,
+  },
+});
 
 export default DataTableComponent;
