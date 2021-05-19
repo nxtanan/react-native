@@ -30,6 +30,8 @@ const MusicComponent = () => {
   const [isOpen, setOpen] = useState(false);
   const onStateChange = ({open}) => setOpen(open);
 
+  const deleteMessage = 'Are you sure to delete this song';
+
   const showModal = song => {
     setTarget(song);
     setVisible(true);
@@ -203,8 +205,9 @@ const MusicComponent = () => {
         />
       </Portal>
       <ConfirmModalComponent
-        isOpen={visible}
-        song={target}
+        open={visible}
+        target={target}
+        message={deleteMessage}
         onDismiss={hideModal}
         onConfirm={song => deleteSong(song)}
       />

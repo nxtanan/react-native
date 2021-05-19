@@ -1,19 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Colors, IconButton, Modal, Portal} from 'react-native-paper';
 import Style from '../css/Style';
 
-const ConfirmModalComponent = ({isOpen, song, onDismiss, onConfirm}) => {
-  const [visible, setVisible] = useState(isOpen);
+const ConfirmModalComponent = ({
+  open,
+  target,
+  message,
+  onDismiss,
+  onConfirm,
+}) => {
+  const [visible, setVisible] = useState(open);
 
   const handleConfirm = () => {
-    onConfirm(song);
+    onConfirm(target);
     setVisible(false);
   };
 
   useEffect(() => {
-    setVisible(isOpen);
-  }, [isOpen]);
+    setVisible(open);
+  }, [open]);
 
   return (
     <Portal>
@@ -21,7 +27,7 @@ const ConfirmModalComponent = ({isOpen, song, onDismiss, onConfirm}) => {
         visible={visible}
         onDismiss={onDismiss}
         contentContainerStyle={Style.containerStyle}>
-        <Text>Are you sure to delete this song</Text>
+        <Text>{message}</Text>
         <View style={Style.modalContainer}>
           <IconButton
             style={Style.iconButtonContainer}
