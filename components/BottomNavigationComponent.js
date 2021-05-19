@@ -15,11 +15,11 @@ const TimerRoute = () => <Text>Timer</Text>;
 const BottomNavigationComponent = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'music', title: 'Musics', icon: 'music'},
-    {key: 'image', title: 'Images', icon: 'image'},
-    {key: 'video', title: 'Videos', icon: 'video'},
-    {key: 'recent', title: 'Recent', icon: 'history'},
-    {key: 'timer', title: 'Timer', icon: 'timer'},
+    {key: 'music', title: 'Musics', icon: 'music', color: '#66d9ff'},
+    {key: 'image', title: 'Images', icon: 'image', color: '#009688'},
+    {key: 'video', title: 'Videos', icon: 'video', color: '#795548'},
+    {key: 'recent', title: 'Recent', icon: 'history', color: '#607D8B'},
+    {key: 'timer', title: 'Timer', icon: 'timer', color: '#3F51B5'},
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
