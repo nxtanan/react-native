@@ -30,7 +30,7 @@ const SongComponent = ({route, navigation}) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${API_PATH.MOCK_API_SONG_GET_BY_ID}a/${songID}`)
+    fetch(`${API_PATH.MOCK_API_SONG_GET_BY_ID}/${songID}`)
       .then(response => (response.ok ? response.json() : null))
       .then(json => {
         if (json) {
