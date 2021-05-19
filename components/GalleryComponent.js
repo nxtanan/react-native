@@ -7,6 +7,7 @@ import {
   Colors,
   Provider,
 } from 'react-native-paper';
+import Style from '../css/Style';
 
 const GalleryComponent = ({randomNumber}) => {
   const [isLoading, setLoading] = useState(true);
@@ -47,7 +48,11 @@ const GalleryComponent = ({randomNumber}) => {
         value={searchQuery}
       />
       {isLoading ? (
-        <ActivityIndicator animating={true} color={Colors.red500} />
+        <ActivityIndicator
+          style={Style.noDataText}
+          animating={true}
+          color={Colors.red500}
+        />
       ) : (
         <ScrollView>
           {imageList.map((image, index) => (

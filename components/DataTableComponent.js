@@ -39,7 +39,11 @@ const DataTableComponent = () => {
   return (
     <Provider>
       {isLoading ? (
-        <ActivityIndicator animating={true} color={Colors.red500} />
+        <ActivityIndicator
+          style={Style.noDataText}
+          animating={true}
+          color={Colors.red500}
+        />
       ) : recent.length === 0 ? (
         <Text style={Style.noDataText}>No data found</Text>
       ) : (
