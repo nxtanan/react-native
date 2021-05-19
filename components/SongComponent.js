@@ -40,7 +40,7 @@ const SongComponent = ({route, navigation}) => {
           setError(true);
         }
       })
-      .catch(error => console.error(error))
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [songID]);
 
