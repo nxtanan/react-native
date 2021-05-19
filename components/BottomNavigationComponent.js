@@ -2,7 +2,6 @@ import React from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import MusicComponent from './MusicComponent';
 import GalleryComponent from './GalleryComponent';
-import Style from '../css/Style';
 
 const randomNumber = Math.floor(Math.random() * 20) + 1;
 
@@ -35,7 +34,6 @@ const BottomNavigationComponent = () => {
       navigationState={{index, routes}}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      barStyle={Style.bottomNavigation}
     />
   );
 };
