@@ -90,10 +90,14 @@ const MusicComponent = () => {
           'Content-Type': 'application/json',
         },
       })
-        .then(() => {
-          createRecent('Delete', song.title);
-          getData();
-          Toast.show('Delete successfully', 2000, Toast.CENTER);
+        .then(response => {
+          if (response.ok) {
+            createRecent('Delete', song.title);
+            getData();
+            Toast.show('Delete successfully', 2000, Toast.CENTER);
+          } else {
+            Toast.show('Delete fail, please try again', 2000, Toast.CENTER);
+          }
           setTarget({});
           setVisible(false);
         })

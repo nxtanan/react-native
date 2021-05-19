@@ -62,13 +62,17 @@ const SongCreateComponent = ({route, navigation}) => {
       },
       body: JSON.stringify(data),
     })
-      .then(() => {
-        createRecent('Create');
-        Toast.show('Create successfully', 2000, Toast.CENTER);
-        goBackMusic();
+      .then(response => {
+        if (response.ok) {
+          createRecent('Create');
+          Toast.show('Create successfully', 2000, Toast.CENTER);
+          goBackMusic();
+        } else {
+          Toast.show('Create fail, please try again', 2000, Toast.CENTER);
+          setLoading(false);
+        }
       })
       .catch(error => {
-        Toast.show('Create fail, please try again', 2000, Toast.CENTER);
         setServerError(true);
       })
       .finally(() => goBackMusic);
@@ -83,13 +87,17 @@ const SongCreateComponent = ({route, navigation}) => {
       },
       body: JSON.stringify(data),
     })
-      .then(() => {
-        createRecent('Update');
-        Toast.show('Update successfully', 2000, Toast.CENTER);
-        goBackMusic();
+      .then(response => {
+        if (response.ok) {
+          createRecent('Update');
+          Toast.show('Update successfully', 2000, Toast.CENTER);
+          goBackMusic();
+        } else {
+          Toast.show('Update fail, please try again', 2000, Toast.CENTER);
+          setLoading(false);
+        }
       })
       .catch(error => {
-        Toast.show('Update fail, please try again', 2000, Toast.CENTER);
         setServerError(true);
       })
       .finally(() => goBackMusic);
