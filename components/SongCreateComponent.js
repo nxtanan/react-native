@@ -9,7 +9,7 @@ const SongCreateComponent = ({route, navigation}) => {
   const {
     params: {song},
   } = route;
-  const emptyCreateData = {
+  const initialData = {
     title: null,
     length: null,
     views: 0,
@@ -17,7 +17,7 @@ const SongCreateComponent = ({route, navigation}) => {
     singer: null,
     addDate: moment().format('DD/MM/YYYY'),
   };
-  const [data, setData] = useState(song ?? emptyCreateData);
+  const [data, setData] = useState(song ?? initialData);
   const [isLoading, setLoading] = useState(false);
   const [serverError, setServerError] = useState(false);
 

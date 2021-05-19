@@ -11,20 +11,10 @@ import {
 } from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
 import Style from '../css/Style';
-import Toast from 'react-native-simple-toast';
 
 const SongComponent = ({route, navigation}) => {
   const {params: songID} = route;
-  const emptyData = {
-    id: null,
-    title: null,
-    length: null,
-    views: null,
-    musician: null,
-    singer: null,
-    addDate: null,
-  };
-  const [song, setSong] = useState(emptyData);
+  const [song, setSong] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
