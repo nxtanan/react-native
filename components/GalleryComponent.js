@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
-import {Card, Searchbar} from 'react-native-paper';
+import {ScrollView, Text} from 'react-native';
+import {
+  Card,
+  Searchbar,
+  ActivityIndicator,
+  Colors,
+  Provider,
+} from 'react-native-paper';
 
 const GalleryComponent = ({randomNumber}) => {
   const [isLoading, setLoading] = useState(true);
@@ -18,6 +24,7 @@ const GalleryComponent = ({randomNumber}) => {
       .then(json => {
         setData(json);
         setImageList(json);
+        setLoading(false);
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
@@ -33,16 +40,16 @@ const GalleryComponent = ({randomNumber}) => {
   };
 
   return (
-    <View>
+    <Provider>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator animating={true} color={Colors.red500} />
       ) : (
         <ScrollView>
-          <Searchbar
-            placeholder="Search"
-            onChangeText={onChangeSearch}
-            value={searchQuery}
-          />
           {imageList.map((image, index) => (
             <Card key={index}>
               <Card.Title
@@ -54,7 +61,7 @@ const GalleryComponent = ({randomNumber}) => {
           ))}
         </ScrollView>
       )}
-    </View>
+    </Provider>
   );
 };
 

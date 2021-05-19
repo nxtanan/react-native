@@ -141,14 +141,13 @@ const MusicComponent = () => {
   return (
     <Provider>
       <Searchbar
-        style={Style.searchBar}
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
       <ScrollView>
         {isLoading ? (
-          <ActivityIndicator animating={true} color={Colors.red800} />
+          <ActivityIndicator animating={true} color={Colors.red500} />
         ) : playList.length === 0 ? (
           <Text style={Style.noDataText}>No data found</Text>
         ) : (

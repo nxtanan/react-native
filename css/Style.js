@@ -6,9 +6,6 @@ const Style = StyleSheet.create({
     right: 10,
     top: 0,
   },
-  searchBar: {
-    width: '100%',
-  },
   container: {
     flex: 1,
     flexDirection: 'row',

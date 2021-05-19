@@ -7,6 +7,7 @@ import {
   Paragraph,
   List,
   ActivityIndicator,
+  Colors,
 } from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
 
@@ -52,7 +53,7 @@ const SongComponent = ({route, navigation}) => {
   return (
     <ScrollView>
       {isLoading ? (
-        <ActivityIndicator animating={true} />
+        <ActivityIndicator animating={true} color={Colors.red500} />
       ) : (
         <Card>
           <Card.Title

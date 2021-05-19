@@ -1,12 +1,10 @@
 import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import {
   ActivityIndicator,
   Colors,
   DataTable,
-  FAB,
-  Portal,
   Provider,
 } from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
@@ -16,8 +14,6 @@ const DataTableComponent = () => {
   const isFocused = useIsFocused();
   const [recent, setRecent] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [isOpen, setOpen] = useState(false);
-  const onStateChange = ({open}) => setOpen(open);
   const itemsPerPage = 5;
   const [page, setPage] = useState(0);
   const from = page * itemsPerPage;
@@ -43,7 +39,7 @@ const DataTableComponent = () => {
   return (
     <Provider>
       {isLoading ? (
-        <ActivityIndicator animating={true} color={Colors.red800} />
+        <ActivityIndicator animating={true} color={Colors.red500} />
       ) : recent.length === 0 ? (
         <Text style={Style.noDataText}>No data found</Text>
       ) : (
@@ -70,33 +66,6 @@ const DataTableComponent = () => {
               label={`${from + 1}-${to} of ${recent.length}`}
             />
           </DataTable>
-          <Portal>
-            <FAB.Group
-              open={isOpen}
-              icon={isOpen ? 'calendar-today' : 'plus'}
-              actions={[
-                {icon: 'plus', onPress: () => console.log('Pressed add')},
-                {
-                  icon: 'star',
-                  label: 'Star',
-                  onPress: () => console.log('Pressed star'),
-                },
-                {
-                  icon: 'email',
-                  label: 'Email',
-                  onPress: () => console.log('Pressed email'),
-                },
-                {
-                  icon: 'bell',
-                  label: 'Remind',
-                  onPress: () => console.log('Pressed notifications'),
-                  small: false,
-                },
-              ]}
-              onStateChange={onStateChange}
-              onPress={() => {}}
-            />
-          </Portal>
         </ScrollView>
       )}
     </Provider>
