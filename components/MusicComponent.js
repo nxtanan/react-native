@@ -1,7 +1,7 @@
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {
   ActivityIndicator,
   Colors,
@@ -16,6 +16,7 @@ import Toast from 'react-native-simple-toast';
 import * as API_PATH from '../constants/APIPath';
 import * as COMPONENT_NAME from '../constants/ComponentName';
 import ConfirmModalComponent from './ConfirmModalComponent';
+import Style from '../css/Style';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -140,7 +141,7 @@ const MusicComponent = () => {
   return (
     <Provider>
       <Searchbar
-        style={styles.searchBar}
+        style={Style.searchBar}
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
@@ -149,12 +150,12 @@ const MusicComponent = () => {
         {isLoading ? (
           <ActivityIndicator animating={true} color={Colors.red800} />
         ) : playList.length === 0 ? (
-          <Text style={styles.noDataText}>No data found</Text>
+          <Text style={Style.noDataText}>No data found</Text>
         ) : (
           <List.Section>
             {playList.map((song, index) => (
               <List.Item
-                style={styles.listItemContainer}
+                style={Style.listItemContainer}
                 key={song.id}
                 title={renderSongTitle(song)}
                 left={renderLeft}
@@ -203,40 +204,5 @@ const MusicComponent = () => {
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    right: 10,
-    top: 0,
-  },
-  searchBar: {
-    width: '100%',
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  buttonContainer: {
-    flex: 1,
-  },
-  snackBarContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  listItemContainer: {
-    borderStyle: 'dotted',
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.8,
-  },
-  noDataText: {
-    textAlignVertical: 'center',
-    textAlign: 'center',
-    marginTop: 30,
-  },
-});
 
 export default MusicComponent;

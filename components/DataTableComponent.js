@@ -10,6 +10,7 @@ import {
   Provider,
 } from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
+import Style from '../css/Style';
 
 const DataTableComponent = () => {
   const isFocused = useIsFocused();
@@ -44,7 +45,7 @@ const DataTableComponent = () => {
       {isLoading ? (
         <ActivityIndicator animating={true} color={Colors.red800} />
       ) : recent.length === 0 ? (
-        <Text style={styles.noDataText}>No data found</Text>
+        <Text style={Style.noDataText}>No data found</Text>
       ) : (
         <ScrollView>
           <DataTable>
@@ -101,13 +102,5 @@ const DataTableComponent = () => {
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  noDataText: {
-    textAlignVertical: 'center',
-    textAlign: 'center',
-    marginTop: 30,
-  },
-});
 
 export default DataTableComponent;

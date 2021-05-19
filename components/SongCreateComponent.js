@@ -3,7 +3,6 @@ import {ScrollView} from 'react-native';
 import {TextInput, Button, HelperText} from 'react-native-paper';
 import * as API_PATH from '../constants/APIPath';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 
 const SongCreateComponent = ({route, navigation}) => {
@@ -143,15 +142,6 @@ const SongCreateComponent = ({route, navigation}) => {
       </Button>
     </ScrollView>
   );
-};
-
-SongCreateComponent.propTypes = {
-  data: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    musician: PropTypes.string.isRequired,
-    singer: PropTypes.string.isRequired,
-    length: PropTypes.string.isRequired,
-  }),
 };
 
 export default SongCreateComponent;
