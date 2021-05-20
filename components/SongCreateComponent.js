@@ -1,9 +1,21 @@
-import React, {useState} from 'react';
-import {ScrollView} from 'react-native';
-import {TextInput, Button, HelperText} from 'react-native-paper';
-import * as API_PATH from '../constants/APIPath';
 import moment from 'moment';
+import {
+  Button,
+  Container,
+  Content,
+  Form,
+  Icon,
+  Input,
+  Item,
+  Label,
+  Text,
+} from 'native-base';
+import React, {useState} from 'react';
 import Toast from 'react-native-simple-toast';
+// import {ScrollView} from 'react-native';
+// import {TextInput, Button, HelperText} from 'react-native-paper';
+import * as API_PATH from '../constants/APIPath';
+import Style from '../css/Style';
 
 const SongCreateComponent = ({route, navigation}) => {
   const {
@@ -44,7 +56,7 @@ const SongCreateComponent = ({route, navigation}) => {
       .finally(() => console.log('Finally'));
   };
 
-  const handleSavePress = () => {
+  const handleSubmit = () => {
     setLoading(true);
     if (song) {
       updateSong(song);
@@ -111,44 +123,85 @@ const SongCreateComponent = ({route, navigation}) => {
     return !pattern.test(data.length);
   };
 
-  const disableButton = serverError || hasLengthErrors();
+  const disabledButton = serverError || hasLengthErrors() || isLoading;
 
   return (
-    <ScrollView>
-      <HelperText type="error" visible={serverError}>
-        Add song to playlist fail, please try again
-      </HelperText>
-      <TextInput
-        label="Title"
-        value={data.title}
-        onChangeText={text => setData({...data, title: text})}
-      />
-      <TextInput
-        label="Musician"
-        value={data.musician}
-        onChangeText={text => setData({...data, musician: text})}
-      />
-      <TextInput
-        label="Signer"
-        value={data.singer}
-        onChangeText={text => setData({...data, singer: text})}
-      />
-      <TextInput
-        label="Length"
-        value={data.length}
-        onChangeText={text => setData({...data, length: text})}
-      />
-      <HelperText type="error" visible={hasLengthErrors()}>
-        Length must follows the format mm:ss
-      </HelperText>
-      <Button
-        icon="plus"
-        disabled={disableButton}
-        onPress={handleSavePress}
-        loading={isLoading}>
-        Save
-      </Button>
-    </ScrollView>
+    <Container>
+      <Content>
+        <Form>
+          <Item floatingLabel>
+            <Label>Title</Label>
+            <Input
+              value={data.title}
+              onChangeText={text => setData({...data, title: text})}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Label>Musician</Label>
+            <Input
+              value={data.musician}
+              onChangeText={text => setData({...data, musician: text})}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Label>Singer</Label>
+            <Input
+              value={data.singer}
+              onChangeText={text => setData({...data, singer: text})}
+            />
+          </Item>
+          <Item floatingLabel error={hasLengthErrors()} last>
+            <Label>Length</Label>
+            <Input
+              value={data.length}
+              onChangeText={text => setData({...data, length: text})}
+            />
+            {hasLengthErrors() ? <Icon name="close-circle" /> : <></>}
+          </Item>
+          <Button
+            disabled={disabledButton}
+            style={Style.NB_Button}
+            onPress={handleSubmit}>
+            <Text>Submit</Text>
+          </Button>
+        </Form>
+      </Content>
+    </Container>
+    // <ScrollView>
+    //   <HelperText type="error" visible={serverError}>
+    //     Add song to playlist fail, please try again
+    //   </HelperText>
+    //   <TextInput
+    //     label="Title"
+    //     value={data.title}
+    //     onChangeText={text => setData({...data, title: text})}
+    //   />
+    //   <TextInput
+    //     label="Musician"
+    //     value={data.musician}
+    //     onChangeText={text => setData({...data, musician: text})}
+    //   />
+    //   <TextInput
+    //     label="Signer"
+    //     value={data.singer}
+    //     onChangeText={text => setData({...data, singer: text})}
+    //   />
+    //   <TextInput
+    //     label="Length"
+    //     value={data.length}
+    //     onChangeText={text => setData({...data, length: text})}
+    //   />
+    //   <HelperText type="error" visible={hasLengthErrors()}>
+    //     Length must follows the format mm:ss
+    //   </HelperText>
+    //   <Button
+    //     icon="plus"
+    //     disabled={disableButton}
+    //     onPress={handleSavePress}
+    //     loading={isLoading}>
+    //     Save
+    //   </Button>
+    // </ScrollView>
   );
 };
 

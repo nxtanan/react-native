@@ -1,5 +1,6 @@
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import moment from 'moment';
+import {Button, Header, Icon, Input, Item} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {
@@ -8,15 +9,14 @@ import {
   FAB,
   IconButton,
   List,
-  Provider,
-  Searchbar,
   Portal,
+  Provider,
 } from 'react-native-paper';
 import Toast from 'react-native-simple-toast';
 import * as API_PATH from '../constants/APIPath';
 import * as COMPONENT_NAME from '../constants/ComponentName';
-import ConfirmModalComponent from './ConfirmModalComponent';
 import Style from '../css/Style';
+import ConfirmModalComponent from './ConfirmModalComponent';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -42,7 +42,15 @@ const MusicComponent = () => {
     fetch(API_PATH.MOCK_API_SONG_GET_ALL)
       .then(response => response.json())
       .then(json => {
-        setPlayList(json);
+        if (searchQuery) {
+          setPlayList(
+            json.filter(song =>
+              song.title.toUpperCase().includes(searchQuery.toUpperCase()),
+            ),
+          );
+        } else {
+          setPlayList(json);
+        }
         setPlayListTemp(json);
         setLoading(false);
       })
@@ -54,6 +62,7 @@ const MusicComponent = () => {
     if (isFocused) {
       getData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   const onChangeSearch = query => {
@@ -146,11 +155,25 @@ const MusicComponent = () => {
 
   return (
     <Provider>
-      <Searchbar
+      {/* <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
-      />
+      /> */}
+      <Header searchBar rounded>
+        <Item>
+          <Icon name="ios-search" />
+          <Input
+            value={searchQuery}
+            onChangeText={onChangeSearch}
+            placeholder="Search"
+          />
+          <Icon name="ios-people" />
+        </Item>
+        <Button transparent>
+          <Text>Search</Text>
+        </Button>
+      </Header>
       <ScrollView>
         {isLoading ? (
           <ActivityIndicator

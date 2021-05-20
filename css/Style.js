@@ -35,6 +35,10 @@ const Style = StyleSheet.create({
   NB_Icon: {
     color: '#ED4A6A',
   },
+  NB_Button: {
+    alignSelf: 'center',
+    marginTop: 10,
+  },
 });
 
 export default Style;
