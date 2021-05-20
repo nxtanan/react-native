@@ -1,26 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 const Style = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    right: 10,
-    top: 0,
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  buttonContainer: {
-    flex: 1,
-  },
-  snackBarContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  listItemContainer: {
+  RNP_List_Item: {
     borderStyle: 'dotted',
     borderBottomColor: 'black',
     borderBottomWidth: 0.8,
@@ -30,19 +11,29 @@ const Style = StyleSheet.create({
     textAlign: 'center',
     marginTop: 30,
   },
-  modalContainer: {
+  RN_View: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
   },
-  iconButtonContainer: {
+  RNP_IconButton: {
     marginRight: 80,
   },
-  containerStyle: {
+  RNP_Modal_Content: {
     backgroundColor: 'white',
     padding: 20,
+  },
+  NB_Card: {
+    elevation: 3,
+  },
+  RN_Image: {
+    height: 300,
+    flex: 1,
+  },
+  NB_Icon: {
+    color: '#ED4A6A',
   },
 });
 

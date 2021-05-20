@@ -164,7 +164,7 @@ const MusicComponent = () => {
           <List.Section>
             {playList.map((song, index) => (
               <List.Item
-                style={Style.listItemContainer}
+                style={Style.RNP_List_Item}
                 key={song.id}
                 title={renderSongTitle(song)}
                 left={renderLeft}

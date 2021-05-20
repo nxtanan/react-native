@@ -2,6 +2,7 @@ import React from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import MusicComponent from './MusicComponent';
 import GalleryComponent from './GalleryComponent';
+import ImageListComponent from './ImageListComponent';
 
 const randomNumber = Math.floor(Math.random() * 20) + 1;
 
@@ -9,7 +10,7 @@ const MusicRoute = () => <MusicComponent />;
 const ImagesRoute = () => <GalleryComponent randomNumber={randomNumber} />;
 const VideosRoute = () => <Text>Videos</Text>;
 const RecentRoute = () => <Text>Recent</Text>;
-const TimerRoute = () => <Text>Timer</Text>;
+const TimerRoute = () => <ImageListComponent randomNumber={randomNumber} />;
 
 const BottomNavigationComponent = () => {
   const [index, setIndex] = React.useState(0);

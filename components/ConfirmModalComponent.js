@@ -26,11 +26,11 @@ const ConfirmModalComponent = ({
       <Modal
         visible={visible}
         onDismiss={onDismiss}
-        contentContainerStyle={Style.containerStyle}>
+        contentContainerStyle={Style.RNP_Modal_Content}>
         <Text>{message}</Text>
-        <View style={Style.modalContainer}>
+        <View style={Style.RN_View}>
           <IconButton
-            style={Style.iconButtonContainer}
+            style={Style.RNP_IconButton}
             icon="check"
             color={Colors.green500}
             size={20}
