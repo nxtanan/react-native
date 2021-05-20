@@ -20,14 +20,13 @@ const ImageListComponent = ({randomNumber}) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://picsum.photos/v2/list?page=${randomNumber}&limit=5`)
-      .then(response => response.json())
+    fetch(`https://picsum.photos/v2/list?page=${randomNumber}&limit=10`)
+      .then(response => (response.ok ? response.json() : []))
       .then(json => {
         setImageList(json);
-        setLoading(false);
       })
       .catch(error => console.error(error))
-      .finally(() => {});
+      .finally(() => setLoading(false));
   }, [randomNumber]);
 
   return (

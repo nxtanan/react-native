@@ -21,10 +21,9 @@ const DataTableComponent = () => {
 
   const getData = () => {
     fetch(API_PATH.MOCK_API_RECENT_GET_ALL)
-      .then(response => response.json())
+      .then(response => (response.ok ? response.json() : []))
       .then(json => {
         setRecent(json);
-        setLoading(false);
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));

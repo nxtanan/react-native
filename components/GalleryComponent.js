@@ -21,7 +21,7 @@ const GalleryComponent = ({randomNumber}) => {
 
   useEffect(() => {
     fetch(`https://picsum.photos/v2/list?page=${randomNumber}&limit=10`)
-      .then(response => response.json())
+      .then(response => (response.ok ? response.json() : []))
       .then(json => {
         setData(json);
         setImageList(json);
@@ -53,6 +53,8 @@ const GalleryComponent = ({randomNumber}) => {
           animating={true}
           color={Colors.red500}
         />
+      ) : imageList.length === 0 ? (
+        <Text style={Style.noDataText}>No data found</Text>
       ) : (
         <ScrollView>
           {imageList.map((image, index) => (

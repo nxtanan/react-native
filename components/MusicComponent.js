@@ -40,7 +40,7 @@ const MusicComponent = () => {
 
   const getData = () => {
     fetch(API_PATH.MOCK_API_SONG_GET_ALL)
-      .then(response => response.json())
+      .then(response => (response.ok ? response.json() : []))
       .then(json => {
         if (searchQuery) {
           setPlayList(
@@ -52,7 +52,6 @@ const MusicComponent = () => {
           setPlayList(json);
         }
         setPlayListTemp(json);
-        setLoading(false);
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
