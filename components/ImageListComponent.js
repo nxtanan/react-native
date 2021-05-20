@@ -34,6 +34,8 @@ const ImageListComponent = ({randomNumber}) => {
       <View>
         {isLoading ? (
           <Spinner />
+        ) : imageList.length === 0 ? (
+          <Text style={Style.noDataText}>No data found</Text>
         ) : (
           <DeckSwiper
             dataSource={imageList}
@@ -50,6 +52,7 @@ const ImageListComponent = ({randomNumber}) => {
                 </CardItem>
                 <CardItem cardBody>
                   <Image
+                    // defaultSource={require('../assets/images/loadingCloud.gif')}
                     style={Style.RN_Image}
                     source={{uri: `${item.download_url}`}}
                   />
