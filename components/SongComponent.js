@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
-import {
-  Avatar,
-  Card,
-  Title,
-  Paragraph,
-  List,
-  ActivityIndicator,
-  Colors,
-} from 'react-native-paper';
+import {Avatar, Card, Title, Paragraph, List, Colors} from 'react-native-paper';
+import {Spinner} from 'native-base';
 import * as API_PATH from '../constants/APIPath';
 import Style from '../css/Style';
 
@@ -50,11 +43,7 @@ const SongComponent = ({route, navigation}) => {
   return (
     <ScrollView>
       {isLoading ? (
-        <ActivityIndicator
-          style={Style.noDataText}
-          animating={true}
-          color={Colors.red500}
-        />
+        <Spinner />
       ) : error ? (
         <Text style={Style.noDataText}>No data found</Text>
       ) : (

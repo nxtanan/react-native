@@ -9,25 +9,29 @@ const randomNumber = Math.floor(Math.random() * 20) + 1;
 const MusicRoute = () => <MusicComponent />;
 const ImagesRoute = () => <GalleryComponent randomNumber={randomNumber} />;
 const VideosRoute = () => <Text>Videos</Text>;
-const RecentRoute = () => <Text>Recent</Text>;
-const TimerRoute = () => <ImageListComponent randomNumber={randomNumber} />;
+const ImageSwiperRoute = () => (
+  <ImageListComponent randomNumber={randomNumber} />
+);
 
 const BottomNavigationComponent = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'music', title: 'Musics', icon: 'music', color: '#66d9ff'},
+    {key: 'music', title: 'Musics', icon: 'music', color: '#2A8EAF'},
     {key: 'image', title: 'Images', icon: 'image', color: '#009688'},
-    {key: 'video', title: 'Videos', icon: 'video', color: '#795548'},
-    {key: 'recent', title: 'Recent', icon: 'history', color: '#607D8B'},
-    {key: 'timer', title: 'Timer', icon: 'timer', color: '#3F51B5'},
+    {
+      key: 'swiper',
+      title: 'Image Swiper',
+      icon: 'image-multiple',
+      color: '#2D7C55',
+    },
+    {key: 'video', title: 'Videos', icon: 'video', color: '#1B603D'},
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     music: MusicRoute,
     image: ImagesRoute,
+    swiper: ImageSwiperRoute,
     video: VideosRoute,
-    recent: RecentRoute,
-    timer: TimerRoute,
   });
 
   return (

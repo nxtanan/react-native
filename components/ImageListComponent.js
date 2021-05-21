@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Image} from 'react-native';
 import {
   Container,
   View,
@@ -13,6 +12,9 @@ import {
   Icon,
   Spinner,
 } from 'native-base';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
+import FastImage from 'react-native-fast-image';
 import Style from '../css/Style';
 
 const ImageListComponent = ({randomNumber}) => {
@@ -20,7 +22,7 @@ const ImageListComponent = ({randomNumber}) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://picsum.photos/v2/list?page=${randomNumber}&limit=10`)
+    fetch(`https://picsum.photos/v2/list?page=${randomNumber + 1}&limit=30`)
       .then(response => (response.ok ? response.json() : []))
       .then(json => {
         setImageList(json);
@@ -32,6 +34,10 @@ const ImageListComponent = ({randomNumber}) => {
   return (
     <Container>
       <View>
+        {/* <Progress.Bar progress={0.3} width={200} />
+        <Progress.Pie progress={0.4} size={50} />
+        <Progress.Circle size={30} indeterminate={true} />
+        <Progress.CircleSnail color={['red', 'green', 'blue']} /> */}
         {isLoading ? (
           <Spinner />
         ) : imageList.length === 0 ? (
@@ -52,9 +58,9 @@ const ImageListComponent = ({randomNumber}) => {
                 </CardItem>
                 <CardItem cardBody>
                   <Image
-                    // defaultSource={require('../assets/images/loadingCloud.gif')}
-                    style={Style.RN_Image}
                     source={{uri: `${item.download_url}`}}
+                    indicator={Progress.Circle}
+                    style={Style.RN_Image}
                   />
                 </CardItem>
                 <CardItem>

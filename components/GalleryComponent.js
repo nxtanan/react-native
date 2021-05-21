@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text} from 'react-native';
-import {
-  Card,
-  Searchbar,
-  ActivityIndicator,
-  Colors,
-  Provider,
-} from 'react-native-paper';
+import {Card, Provider} from 'react-native-paper';
+import {Spinner} from 'native-base';
+import * as Progress from 'react-native-progress';
+import {createImageProgress} from 'react-native-image-progress';
+
 import Style from '../css/Style';
+
+const Image = createImageProgress(Card.Cover);
 
 const GalleryComponent = ({randomNumber}) => {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = React.useState('');
   const [imageList, setImageList] = React.useState([]);
 
   const renderSubtitle = image => (
@@ -23,7 +21,6 @@ const GalleryComponent = ({randomNumber}) => {
     fetch(`https://picsum.photos/v2/list?page=${randomNumber}&limit=10`)
       .then(response => (response.ok ? response.json() : []))
       .then(json => {
-        setData(json);
         setImageList(json);
         setLoading(false);
       })
@@ -31,28 +28,10 @@ const GalleryComponent = ({randomNumber}) => {
       .finally(() => setLoading(false));
   }, [randomNumber]);
 
-  const onChangeSearch = query => {
-    setSearchQuery(query);
-    setImageList(
-      data.filter(image =>
-        image.author.toUpperCase().includes(query.toUpperCase()),
-      ),
-    );
-  };
-
   return (
     <Provider>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-      />
       {isLoading ? (
-        <ActivityIndicator
-          style={Style.noDataText}
-          animating={true}
-          color={Colors.red500}
-        />
+        <Spinner />
       ) : imageList.length === 0 ? (
         <Text style={Style.noDataText}>No data found</Text>
       ) : (
@@ -63,7 +42,12 @@ const GalleryComponent = ({randomNumber}) => {
                 title={image.author}
                 subtitle={renderSubtitle(image)}
               />
-              <Card.Cover source={{uri: `${image.download_url}`}} />
+              {/* <Card.Cover source={{uri: `${image.download_url}`}} /> */}
+              <Image
+                source={{uri: `${image.download_url}`}}
+                indicator={Progress.Bar}
+                style={Style.IP_Image}
+              />
             </Card>
           ))}
         </ScrollView>

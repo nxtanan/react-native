@@ -29,7 +29,7 @@ const Style = StyleSheet.create({
     elevation: 3,
   },
   RN_Image: {
-    height: 300,
+    height: 400,
     flex: 1,
   },
   NB_Icon: {
@@ -38,6 +38,10 @@ const Style = StyleSheet.create({
   NB_Button: {
     alignSelf: 'center',
     marginTop: 10,
+  },
+  IP_Image: {
+    height: 200,
+    flex: 1,
   },
 });
 

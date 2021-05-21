@@ -1,12 +1,8 @@
 import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text} from 'react-native';
-import {
-  ActivityIndicator,
-  Colors,
-  DataTable,
-  Provider,
-} from 'react-native-paper';
+import {Colors, DataTable, Provider} from 'react-native-paper';
+import {Spinner} from 'native-base';
 import * as API_PATH from '../constants/APIPath';
 import Style from '../css/Style';
 
@@ -38,11 +34,7 @@ const DataTableComponent = () => {
   return (
     <Provider>
       {isLoading ? (
-        <ActivityIndicator
-          style={Style.noDataText}
-          animating={true}
-          color={Colors.red500}
-        />
+        <Spinner />
       ) : recent.length === 0 ? (
         <Text style={Style.noDataText}>No data found</Text>
       ) : (

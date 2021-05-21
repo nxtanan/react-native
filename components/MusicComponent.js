@@ -4,7 +4,6 @@ import {Button, Header, Icon, Input, Item} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {
-  ActivityIndicator,
   Colors,
   FAB,
   IconButton,
@@ -13,6 +12,7 @@ import {
   Provider,
 } from 'react-native-paper';
 import Toast from 'react-native-simple-toast';
+import {Spinner} from 'native-base';
 import * as API_PATH from '../constants/APIPath';
 import * as COMPONENT_NAME from '../constants/ComponentName';
 import Style from '../css/Style';
@@ -154,11 +154,6 @@ const MusicComponent = () => {
 
   return (
     <Provider>
-      {/* <Searchbar
-        placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-      /> */}
       <Header searchBar rounded>
         <Item>
           <Icon name="ios-search" />
@@ -167,7 +162,7 @@ const MusicComponent = () => {
             onChangeText={onChangeSearch}
             placeholder="Search"
           />
-          <Icon name="ios-people" />
+          <Icon name="ios-musical-notes" />
         </Item>
         <Button transparent>
           <Text>Search</Text>
@@ -175,11 +170,7 @@ const MusicComponent = () => {
       </Header>
       <ScrollView>
         {isLoading ? (
-          <ActivityIndicator
-            style={Style.noDataText}
-            animating={true}
-            color={Colors.red500}
-          />
+          <Spinner />
         ) : playList.length === 0 ? (
           <Text style={Style.noDataText}>No data found</Text>
         ) : (
