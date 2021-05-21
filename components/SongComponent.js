@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
-import {Avatar, Card, Title, Paragraph, List, Colors} from 'react-native-paper';
+import {Avatar, Card, Title, Paragraph, List} from 'react-native-paper';
 import {Spinner} from 'native-base';
+import * as Progress from 'react-native-progress';
+import {createImageProgress} from 'react-native-image-progress';
 import * as API_PATH from '../constants/APIPath';
 import Style from '../css/Style';
+
+const Image = createImageProgress(Card.Cover);
 
 const SongComponent = ({route, navigation}) => {
   const {params: songID} = route;
@@ -62,9 +66,20 @@ const SongComponent = ({route, navigation}) => {
               </View>
             </Title>
             <Title>Lyrics</Title>
-            <Paragraph>...some lyrics</Paragraph>
+            <Paragraph>
+              ...some awesome beautiful amazing good job awesome beautiful
+              amazing good job awesome beautiful amazing good job awesome
+              beautiful amazing good job awesome beautiful amazing good job
+              awesome beautiful amazing good job awesome beautiful amazing good
+              job awesome beautiful amazing good job lyrics
+            </Paragraph>
           </Card.Content>
-          <Card.Cover source={imageSource} />
+          {/* <Card.Cover source={imageSource} /> */}
+          <Image
+            source={imageSource}
+            indicator={Progress.Circle}
+            style={Style.IP_Image}
+          />
         </Card>
       )}
     </ScrollView>

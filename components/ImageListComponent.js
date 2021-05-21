@@ -14,7 +14,6 @@ import {
 } from 'native-base';
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
-import FastImage from 'react-native-fast-image';
 import Style from '../css/Style';
 
 const ImageListComponent = ({randomNumber}) => {
