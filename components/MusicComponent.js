@@ -230,7 +230,9 @@ const MusicComponent = () => {
             },
           ]}
           onStateChange={onStateChange}
-          onPress={() => {}}
+          onPress={() => {
+            dispatch({});
+          }}
         />
       </Portal>
       <ConfirmModalComponent
