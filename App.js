@@ -10,6 +10,7 @@ import type {Node} from 'react';
 import React from 'react';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import AppContainer from './navigations/AppContainer';
+import {StateProvider} from './store/store';
 
 const theme = {
   ...DefaultTheme,
@@ -30,9 +31,9 @@ const theme = {
 
 const App: () => Node = () => {
   return (
-    <PaperProvider theme={theme}>
+    <StateProvider theme={theme}>
       <AppContainer />
-    </PaperProvider>
+    </StateProvider>
   );
 };
 

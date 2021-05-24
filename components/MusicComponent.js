@@ -1,7 +1,7 @@
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import {Button, Header, Icon, Input, Item} from 'native-base';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {
   Colors,
@@ -17,6 +17,8 @@ import * as API_PATH from '../constants/APIPath';
 import * as COMPONENT_NAME from '../constants/ComponentName';
 import Style from '../css/Style';
 import ConfirmModalComponent from './ConfirmModalComponent';
+import {store} from '../store/store';
+import * as ACTION from '../constants/Action';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -29,6 +31,10 @@ const MusicComponent = () => {
   const [target, setTarget] = useState({});
   const [isOpen, setOpen] = useState(false);
   const onStateChange = ({open}) => setOpen(open);
+
+  const globalState = useContext(store);
+  const {dispatch} = globalState;
+  console.log(globalState);
 
   const deleteMessage = 'Are you sure to delete this song';
 
@@ -198,6 +204,16 @@ const MusicComponent = () => {
           open={isOpen}
           icon={isOpen ? 'apps-box' : 'apps'}
           actions={[
+            {
+              icon: 'chevron-triple-down',
+              label: 'Decrease Views',
+              onPress: () => dispatch({type: ACTION.DECREASE_VIEWS}),
+            },
+            {
+              icon: 'chevron-triple-up',
+              label: 'Increase Views',
+              onPress: () => dispatch({type: ACTION.INCREASE_VIEWS}),
+            },
             {
               icon: 'history',
               label: 'History',

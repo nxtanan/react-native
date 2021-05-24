@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {Avatar, Card, Title, Paragraph, List} from 'react-native-paper';
 import {Spinner} from 'native-base';
@@ -6,6 +6,7 @@ import * as Progress from 'react-native-progress';
 import {createImageProgress} from 'react-native-image-progress';
 import * as API_PATH from '../constants/APIPath';
 import Style from '../css/Style';
+import {store} from '../store/store';
 
 const Image = createImageProgress(Card.Cover);
 
@@ -14,6 +15,9 @@ const SongComponent = ({route, navigation}) => {
   const [song, setSong] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const globalState = useContext(store);
+  console.log(globalState.state.views);
 
   useEffect(() => {
     setLoading(true);
@@ -40,6 +44,7 @@ const SongComponent = ({route, navigation}) => {
     <List.Subheader>
       <View>
         <Text>Views: {item.views}</Text>
+        <Text>State Views: {globalState.state.views ?? 0}</Text>
       </View>
     </List.Subheader>
   );

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Container,
   View,
@@ -15,10 +15,14 @@ import {
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
 import Style from '../css/Style';
+import {store} from '../store/store';
 
 const ImageListComponent = ({randomNumber}) => {
   const [imageList, setImageList] = useState([]);
   const [isLoading, setLoading] = useState(true);
+
+  const globalState = useContext(store);
+  console.log(globalState);
 
   useEffect(() => {
     fetch(`https://picsum.photos/v2/list?page=${randomNumber + 1}&limit=30`)
