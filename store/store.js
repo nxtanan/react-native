@@ -9,20 +9,17 @@ const StateProvider = ({children}) => {
   const [state, dispatch] = useReducer((currentState, action) => {
     switch (action.type) {
       case ACTION.SAY_HELLO:
-        const newStateHello = {...currentState, hello: 'Hế nô'};
-        return newStateHello;
+        return {...currentState, hello: 'Hế nô'};
       case ACTION.INCREASE_VIEWS:
-        const newStateIncrease = {
+        return {
           ...currentState,
           views: (currentState.views ?? 0) + 1,
         };
-        return newStateIncrease;
       case ACTION.DECREASE_VIEWS:
-        const newStateDecrease = {
+        return {
           ...currentState,
           views: (currentState.views ?? 0) - 1,
         };
-        return newStateDecrease;
       default:
         return currentState;
       // throw new Error();

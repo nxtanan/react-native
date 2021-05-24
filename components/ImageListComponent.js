@@ -21,8 +21,8 @@ const ImageListComponent = ({randomNumber}) => {
   const [imageList, setImageList] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  const globalState = useContext(store);
-  console.log(globalState);
+  // const globalState = useContext(store);
+  // console.log(globalState);
 
   useEffect(() => {
     fetch(`https://picsum.photos/v2/list?page=${randomNumber + 1}&limit=30`)

@@ -17,7 +17,6 @@ const SongComponent = ({route, navigation}) => {
   const [error, setError] = useState(false);
 
   const globalState = useContext(store);
-  console.log(globalState.state.views);
 
   useEffect(() => {
     setLoading(true);
