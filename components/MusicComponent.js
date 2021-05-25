@@ -18,7 +18,7 @@ import * as COMPONENT_NAME from '../constants/ComponentName';
 import Style from '../css/Style';
 import ConfirmModalComponent from './ConfirmModalComponent';
 import {store} from '../store/store';
-import * as ACTION from '../constants/Action';
+import {INCREASE_ACTION, DECREASE_ACTION} from '../constants/Action';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const MusicComponent = () => {
 
   const globalState = useContext(store);
   const {dispatch} = globalState;
-  console.log(globalState);
+  console.log(globalState.state);
 
   const deleteMessage = 'Are you sure to delete this song';
 
@@ -207,12 +207,12 @@ const MusicComponent = () => {
             {
               icon: 'chevron-triple-down',
               label: 'Decrease Views',
-              onPress: () => dispatch({type: ACTION.DECREASE_VIEWS}),
+              onPress: () => dispatch(DECREASE_ACTION),
             },
             {
               icon: 'chevron-triple-up',
               label: 'Increase Views',
-              onPress: () => dispatch({type: ACTION.INCREASE_VIEWS}),
+              onPress: () => dispatch(INCREASE_ACTION),
             },
             {
               icon: 'history',

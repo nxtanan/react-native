@@ -1,3 +1,3 @@
-export const INCREASE_VIEWS = 'Increase views';
-export const DECREASE_VIEWS = 'Decrease views';
-export const SAY_HELLO = 'Say hello';
+export const INCREASE_ACTION = {type: 'Increase views'};
+export const DECREASE_ACTION = {type: 'Decrease views'};
+export const HELLO_ACTION = {type: 'Hello'};
