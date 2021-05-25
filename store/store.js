@@ -3,6 +3,7 @@ import {
   HELLO_ACTION,
   INCREASE_ACTION,
   DECREASE_ACTION,
+  INDEX_ACTION,
 } from '../constants/Action';
 
 const initialState = {};
@@ -18,6 +19,8 @@ const StateProvider = ({children}) => {
         return {...currentState, views: (currentState.views ?? 0) + 1};
       case DECREASE_ACTION.type:
         return {...currentState, views: (currentState.views ?? 0) - 1};
+      case INDEX_ACTION.type:
+        return {...currentState, index: (currentState.index ?? 0) + 10};
       default:
         return currentState;
       // throw new Error();

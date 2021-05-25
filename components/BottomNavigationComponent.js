@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import MusicComponent from './MusicComponent';
 import GalleryComponent from './GalleryComponent';
 import ImageListComponent from './ImageListComponent';
+import {store} from '../store/store';
+import {INDEX_ACTION} from '../constants/Action';
 
 const randomNumber = Math.floor(Math.random() * 20) + 1;
 
@@ -14,6 +16,9 @@ const ImageSwiperRoute = () => (
 );
 
 const BottomNavigationComponent = () => {
+  const globalState = useContext(store);
+  const {dispatch} = globalState;
+  console.log(globalState.state);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'music', title: 'Musics', icon: 'music', color: '#2A8EAF'},
@@ -27,6 +32,11 @@ const BottomNavigationComponent = () => {
     {key: 'video', title: 'Videos', icon: 'video', color: '#1B603D'},
   ]);
 
+  const onIndexChange = i => {
+    setIndex(i);
+    dispatch(INDEX_ACTION);
+  };
+
   const renderScene = BottomNavigation.SceneMap({
     music: MusicRoute,
     image: ImagesRoute,
@@ -37,7 +47,7 @@ const BottomNavigationComponent = () => {
   return (
     <BottomNavigation
       navigationState={{index, routes}}
-      onIndexChange={setIndex}
+      onIndexChange={onIndexChange}
       renderScene={renderScene}
     />
   );
