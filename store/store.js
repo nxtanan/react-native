@@ -16,9 +16,9 @@ const StateProvider = ({children}) => {
       case HELLO_ACTION.type:
         return {...currentState, hello: (currentState.hello ?? '') + 'Hello'};
       case INCREASE_ACTION.type:
-        return {...currentState, views: (currentState.views ?? 0) + 1};
+        return {...currentState, incViews: (currentState.incViews ?? 0) + 1};
       case DECREASE_ACTION.type:
-        return {...currentState, views: (currentState.views ?? 0) - 1};
+        return {...currentState, decViews: (currentState.decViews ?? 0) - 1};
       case INDEX_ACTION.type:
         return {...currentState, index: (currentState.index ?? 0) + 10};
       default:
