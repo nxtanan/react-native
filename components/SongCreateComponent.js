@@ -156,7 +156,7 @@ const SongCreateComponent = ({route, navigation}) => {
               value={data.length}
               onChangeText={text => setData({...data, length: text})}
             />
-            {hasLengthErrors() ? <Icon name="close-circle" /> : <></>}
+            {hasLengthErrors() ? <Icon name="close-circle" /> : null}
           </Item>
           <Button
             disabled={disabledButton}
