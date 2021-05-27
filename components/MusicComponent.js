@@ -23,6 +23,7 @@ import {
   DECREASE_ACTION,
   HELLO_ACTION,
 } from '../constants/Action';
+import SplashScreen from 'react-native-splash-screen';
 
 const MusicComponent = () => {
   const navigation = useNavigation();
@@ -63,7 +64,10 @@ const MusicComponent = () => {
         setPlayListTemp(json);
       })
       .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        SplashScreen.hide();
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
